@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | The Forgotten Code Research Institute</title>
+  <meta name="description" content="About Jennifer Leigh West and The Forgotten Code Research Institute.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080808;
+      --panel: #121212;
+      --ink: #f5efe5;
+      --muted: rgba(245, 239, 229, 0.72);
+      --line: rgba(245, 239, 229, 0.14);
+      --accent: #d7b27c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: linear-gradient(180deg, #060606 0%, #0d0d0d 100%);
+      color: var(--ink);
+      font-family: "Inter", sans-serif;
+      line-height: 1.7;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(8, 8, 8, 0.84);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner, .wrap {
+      width: min(1100px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      gap: 20px;
+    }
+    .brand {
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+    .links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    header, section {
+      padding: 52px 0;
+    }
+    h1, h2 {
+      font-family: "Bodoni Moda", serif;
+      font-weight: 700;
+      line-height: 0.95;
+    }
+    h1 {
+      font-size: clamp(44px, 8vw, 96px);
+      max-width: 11ch;
+    }
+    .eyebrow {
+      color: var(--accent);
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+    .intro {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 18px;
+      margin-top: 24px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 24px;
+      margin-top: 36px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px;
+    }
+    .card h3 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    .card p, .card li {
+      color: var(--muted);
+    }
+    ul {
+      padding-left: 18px;
+    }
+    li + li { margin-top: 8px; }
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+      background: rgba(255,255,255,0.02);
+    }
+    .stat strong {
+      display: block;
+      font-size: 30px;
+      font-family: "Bodoni Moda", serif;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .cta {
+      margin-top: 36px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn {
+      text-decoration: none;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+    .btn.primary {
+      background: var(--ink);
+      color: #080808;
+      border-color: var(--ink);
+    }
+    @media (max-width: 840px) {
+      .grid { grid-template-columns: 1fr; }
+      .stat-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="/">The Forgotten Code</a>
+      <div class="links">
+        <a href="/west-os.html">West-OS</a>
+        <a href="/about.html">About</a>
+        <a href="/resume.html">Resume</a>
+        <a href="/portfolio.html">Portfolio</a>
+      </div>
+    </div>
+  </nav>
+
+  <header>
+    <div class="wrap">
+      <div class="eyebrow">Founder</div>
+      <h1>Jennifer Leigh West</h1>
+      <p class="intro">
+        Jennifer Leigh West is the founder behind The Forgotten Code Research Institute and the builder of
+        West-OS, CHIMERA, Mirror Protocol, and a broader family of original AI systems, diagnostics, and
+        behavioral architectures. Her work sits at the intersection of runtime governance, system design,
+        quantitative research, and unconventional problem framing.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="/west-os.html">Enter West-OS</a>
+        <a class="btn" href="/portfolio.html">See selected work</a>
+        <a class="btn" href="/resume.html">View resume</a>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap grid">
+      <div class="card">
+        <h3>What She Builds</h3>
+        <p>
+          The work is not one thing. It spans AI governance systems, recursive diagnostics, self-evolving
+          capability engines, prompt architectures, quantitative models, and research frameworks designed to
+          make complex systems legible, governable, and deployable.
+        </p>
+        <br>
+        <p>
+          The common thread is operational depth: systems that do not stop at analysis, but move toward
+          enforcement, evidence, adaptation, and real-world consequence management.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Current Focus</h3>
+        <ul>
+          <li>Runtime governance for AI systems</li>
+          <li>Prompt injection, tool misuse, and context-risk defense</li>
+          <li>Cross-channel memory and escalation architectures</li>
+          <li>Quantitative and behavioral system design</li>
+          <li>Research-to-product translation</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="card">
+        <h3>By the Numbers</h3>
+        <div class="stat-row">
+          <div class="stat">
+            <strong>600+</strong>
+            <span>Artifacts shipped in one year across systems, tools, and frameworks</span>
+          </div>
+          <div class="stat">
+            <strong>15+</strong>
+            <span>AI systems and engines built across governance, diagnostics, and capability design</span>
+          </div>
+          <div class="stat">
+            <strong>9</strong>
+            <span>Research papers and whitepapers across AI systems and quantitative methods</span>
+          </div>
+          <div class="stat">
+            <strong>50+</strong>
+            <span>Client or deployment-facing systems, reports, or implementations</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

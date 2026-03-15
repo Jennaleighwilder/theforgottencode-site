@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio | The Forgotten Code Research Institute</title>
+  <meta name="description" content="Selected systems and research portfolio for Jennifer Leigh West.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0b0c;
+      --panel: #151516;
+      --ink: #f2ede5;
+      --muted: rgba(242, 237, 229, 0.7);
+      --line: rgba(242, 237, 229, 0.14);
+      --accent: #8fd0c0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at top right, rgba(143, 208, 192, 0.08), transparent 24%), #0a0a0a;
+      color: var(--ink);
+      font-family: "Inter", sans-serif;
+      line-height: 1.7;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(10, 10, 10, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner, .wrap {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      gap: 20px;
+    }
+    .brand, .links a {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .links { display: flex; gap: 18px; flex-wrap: wrap; }
+    header, section { padding: 46px 0; }
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      font-size: 12px;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-family: "Bodoni Moda", serif;
+      font-weight: 700;
+      font-size: clamp(42px, 7vw, 88px);
+      line-height: 0.95;
+      max-width: 10ch;
+    }
+    .sub {
+      margin-top: 18px;
+      max-width: 760px;
+      font-size: 18px;
+      color: var(--muted);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px;
+      min-height: 220px;
+    }
+    .num {
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .card h3 {
+      font-family: "Bodoni Moda", serif;
+      font-size: 28px;
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+    .card p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .tag {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="/">The Forgotten Code</a>
+      <div class="links">
+        <a href="/west-os.html">West-OS</a>
+        <a href="/about.html">About</a>
+        <a href="/resume.html">Resume</a>
+        <a href="/portfolio.html">Portfolio</a>
+      </div>
+    </div>
+  </nav>
+
+  <header>
+    <div class="wrap">
+      <div class="eyebrow">Selected Systems</div>
+      <h1>Portfolio</h1>
+      <p class="sub">
+        A selection of systems, frameworks, and engines built across AI governance, self-evolving capability design,
+        diagnostics, and research translation. This is not the full archive. It is the front-facing slice.
+      </p>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap grid">
+      <div class="card">
+        <div class="num">01</div>
+        <h3>West-OS</h3>
+        <p>Runtime governance and security layer for AI systems. Governs requests, context, tools, outputs, credentials, and deployment state together.</p>
+        <div class="tags"><span class="tag">AI Governance</span><span class="tag">Runtime Security</span><span class="tag">Deployment Control</span></div>
+      </div>
+      <div class="card">
+        <div class="num">02</div>
+        <h3>CHIMERA CORE</h3>
+        <p>Self-evolving capability engine designed for persistent state, recursive expansion, and adaptive system growth.</p>
+        <div class="tags"><span class="tag">Self-Evolving AI</span><span class="tag">Stateful Systems</span></div>
+      </div>
+      <div class="card">
+        <div class="num">03</div>
+        <h3>Mirror Protocol</h3>
+        <p>Recursive diagnostic framework for coherence, reflection, and identity architecture mapping.</p>
+        <div class="tags"><span class="tag">Diagnostics</span><span class="tag">Framework</span></div>
+      </div>
+      <div class="card">
+        <div class="num">04</div>
+        <h3>The West Method</h3>
+        <p>Prompt engineering and systems methodology used to build complete ecosystems instead of isolated prompts.</p>
+        <div class="tags"><span class="tag">Methodology</span><span class="tag">Prompt Systems</span></div>
+      </div>
+      <div class="card">
+        <div class="num">05</div>
+        <h3>Cognitive Archaeology Engine</h3>
+        <p>Pattern excavation tool for surfacing hidden structures, belief frameworks, and latent system dynamics.</p>
+        <div class="tags"><span class="tag">Pattern Mining</span><span class="tag">Analysis</span></div>
+      </div>
+      <div class="card">
+        <div class="num">06</div>
+        <h3>Harmonic Cognition Engine</h3>
+        <p>Frequency and semantic resonance detection across text and cognitive signals.</p>
+        <div class="tags"><span class="tag">NLP</span><span class="tag">Signal Detection</span></div>
+      </div>
+      <div class="card">
+        <div class="num">07</div>
+        <h3>Emergence Engine</h3>
+        <p>Tracks and visualizes novel pattern formation and capability emergence across system interaction.</p>
+        <div class="tags"><span class="tag">Emergence</span><span class="tag">Monitoring</span></div>
+      </div>
+      <div class="card">
+        <div class="num">08</div>
+        <h3>Self As Protocol</h3>
+        <p>Identity architecture framework that treats the self as an operating system for structured transformation.</p>
+        <div class="tags"><span class="tag">Identity Architecture</span><span class="tag">Framework</span></div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
