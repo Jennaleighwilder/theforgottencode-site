@@ -118,6 +118,24 @@
       font-size: 14px;
     }
     .contact-list a { color: inherit; }
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .project-card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px;
+      background: rgba(255,255,255,0.5);
+    }
+    .project-card h4 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+    .project-card p {
+      font-size: 14px;
+    }
     .pill-row {
       display: flex;
       flex-wrap: wrap;
@@ -157,7 +175,7 @@
       margin-bottom: 6px;
     }
     @media (max-width: 860px) {
-      .top, .two-col, .mini-grid { grid-template-columns: 1fr; }
+      .top, .two-col, .mini-grid, .project-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -208,6 +226,8 @@
             <div>Phone: <a href="tel:4233888304">423-388-8304</a></div>
             <div>GitHub: <a href="https://github.com/Jennaleighwilder" target="_blank" rel="noopener">Jennaleighwilder</a></div>
             <div>LinkedIn: <a href="https://www.linkedin.com/in/jennifer-west-60a7a595/" target="_blank" rel="noopener">Jennifer West</a></div>
+            <div>Substack: <a href="https://wilderwanderings.substack.com" target="_blank" rel="noopener">Wilder Wanderings</a></div>
+            <div>Academia: <a href="https://independent.academia.edu/JenniferLeigh21" target="_blank" rel="noopener">JenniferLeigh21</a></div>
           </div>
         </div>
       </div>
@@ -230,6 +250,36 @@
           <div class="mini-card">
             <strong>50+</strong>
             <span>Client-facing reports, implementations, or system deliveries</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Featured Systems and Projects</h3>
+        <div class="project-grid">
+          <div class="project-card">
+            <h4>West-OS</h4>
+            <p>Runtime governance and security layer for AI systems with hardened proof state: 30/30 golden, 0/1000 benign false positives, 99.25% mutation coverage.</p>
+          </div>
+          <div class="project-card">
+            <h4>CHIMERA CORE</h4>
+            <p>Self-evolving AI capability system with persistent state, recursive expansion, and a wider family of sub-engines including Cognitive Archaeology and Emergence tracking.</p>
+          </div>
+          <div class="project-card">
+            <h4>Mirror Protocol Framework</h4>
+            <p>Recursive diagnostic engine and identity architecture framework with 29+ artifacts and a broader methodology for pattern recognition and coherence mapping.</p>
+          </div>
+          <div class="project-card">
+            <h4>UVRK-1</h4>
+            <p>Quantitative volatility regime model with 94.7% R² correlation against BTC/ETH market data and a public validation/demo surface.</p>
+          </div>
+          <div class="project-card">
+            <h4>The West Method</h4>
+            <p>Prompt-engineering and systems methodology behind 600+ artifacts, spanning behavioral modification, structured system prompts, and research-to-product translation.</p>
+          </div>
+          <div class="project-card">
+            <h4>Custom GPT Development</h4>
+            <p>Specialized assistants and prompt architectures including public GPT builds such as The Velvet Muse and The Quantum Oracle.</p>
           </div>
         </div>
       </div>
@@ -269,6 +319,20 @@
           <span class="pill">Behavioral systems</span>
           <span class="pill">AI product design</span>
           <span class="pill">Research translation</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Publications and Platforms</h3>
+        <div class="two-col">
+          <div class="stack">
+            <p><strong>Substack / Wilder Wanderings</strong><br>20+ essays spanning motherhood, culture, AI ethics, trauma, and social analysis.</p>
+            <p><strong>Academia.edu</strong><br>20+ peer-accessible papers including Mirror Protocol, reward hacking, recursive verification, and world-modeling research.</p>
+          </div>
+          <div class="stack">
+            <p><strong>GitHub</strong><br>Public repositories spanning West-OS, CHIMERA implementations, quantitative models, and tools.</p>
+            <p><strong>Public channels</strong><br>LinkedIn, GitHub, and direct evaluator materials available for technical review.</p>
+          </div>
         </div>
       </div>
 
