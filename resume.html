@@ -4,57 +4,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resume | Jennifer Leigh West</title>
-  <meta name="description" content="Resume and professional profile for Jennifer Leigh West.">
+  <meta name="description" content="Public CV and professional profile for Jennifer Leigh West.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f5f0e7;
-      --paper: #fffaf2;
-      --ink: #171412;
+      --bg: #f4eee4;
+      --paper: #fffaf3;
+      --ink: #171513;
       --muted: #665f58;
-      --line: #d9cec0;
-      --accent: #0f6a5f;
-      --accent-soft: #e4f0ec;
+      --line: #d7ccbf;
+      --accent: #0d6a5f;
+      --accent-soft: #e4f0eb;
+      --warm: #a46b45;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: linear-gradient(180deg, #f4eee5 0%, #eee4d6 100%);
+      background: linear-gradient(180deg, #f3ede2 0%, #ece2d3 100%);
       color: var(--ink);
       font-family: "Inter", sans-serif;
       line-height: 1.7;
     }
-    .wrap {
-      width: min(1100px, calc(100% - 40px));
-      margin: 0 auto;
-    }
     nav {
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 20;
+      background: rgba(244, 238, 228, 0.88);
       backdrop-filter: blur(12px);
-      background: rgba(245, 240, 231, 0.88);
       border-bottom: 1px solid var(--line);
     }
-    .nav-inner {
-      width: min(1100px, calc(100% - 40px));
+    .nav-inner, .wrap {
+      width: min(1120px, calc(100% - 40px));
       margin: 0 auto;
+    }
+    .nav-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 18px 0;
-      gap: 18px;
+      gap: 20px;
     }
     .brand, .links a {
-      text-decoration: none;
       color: var(--ink);
+      text-decoration: none;
       font-size: 12px;
       letter-spacing: 0.14em;
       text-transform: uppercase;
     }
     .links { display: flex; gap: 18px; flex-wrap: wrap; }
-    header, section { padding: 44px 0; }
+    header, section { padding: 42px 0; }
     .eyebrow {
       color: var(--accent);
       text-transform: uppercase;
@@ -78,11 +77,21 @@
       background: var(--paper);
       border: 1px solid var(--line);
       border-radius: 22px;
-      box-shadow: 0 18px 48px rgba(23, 20, 18, 0.08);
+      box-shadow: 0 18px 48px rgba(23, 21, 19, 0.08);
       overflow: hidden;
     }
+    .top {
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 24px;
+      padding: 30px;
+      border-bottom: 1px solid var(--line);
+      background:
+        radial-gradient(circle at top right, rgba(13,106,95,0.06), transparent 30%),
+        linear-gradient(180deg, #fffaf3 0%, #fbf5ed 100%);
+    }
     .section {
-      padding: 28px;
+      padding: 28px 30px;
       border-top: 1px solid var(--line);
     }
     .section:first-child { border-top: 0; }
@@ -99,9 +108,16 @@
     li + li { margin-top: 8px; }
     .two-col {
       display: grid;
-      grid-template-columns: 1.1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 22px;
     }
+    .stack > * + * { margin-top: 10px; }
+    .contact-list {
+      display: grid;
+      gap: 10px;
+      font-size: 14px;
+    }
+    .contact-list a { color: inherit; }
     .pill-row {
       display: flex;
       flex-wrap: wrap;
@@ -111,17 +127,37 @@
       padding: 10px 14px;
       border-radius: 999px;
       background: var(--accent-soft);
-      border: 1px solid #cfe1dc;
+      border: 1px solid #cfe0db;
       font-size: 13px;
       color: #19493f;
     }
-    .footer-note {
-      margin-top: 18px;
-      font-size: 14px;
-      color: var(--muted);
+    .callout {
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--warm);
+      border-radius: 14px;
+      padding: 18px;
+      background: rgba(164,107,69,0.05);
+    }
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .mini-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      background: rgba(255,255,255,0.45);
+    }
+    .mini-card strong {
+      display: block;
+      font-family: "Bodoni Moda", serif;
+      font-size: 28px;
+      color: var(--warm);
+      margin-bottom: 6px;
     }
     @media (max-width: 860px) {
-      .two-col { grid-template-columns: 1fr; }
+      .top, .two-col, .mini-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -140,79 +176,107 @@
 
   <header>
     <div class="wrap">
-      <div class="eyebrow">Professional Profile</div>
-      <h1>Resume</h1>
+      <div class="eyebrow">Public CV</div>
+      <h1>Jennifer Leigh West</h1>
       <p class="sub">
-        Jennifer Leigh West is an AI systems architect, builder, and research-driven operator focused on
-        runtime governance, recursive diagnostics, self-evolving architectures, and quantitative design.
+        AI systems architect, builder, and research-driven operator focused on runtime governance,
+        recursive diagnostics, self-evolving architectures, behavioral systems, and product translation.
       </p>
     </div>
   </header>
 
   <section>
     <div class="wrap sheet">
-      <div class="section">
-        <h3>Summary</h3>
-        <p>
-          Builder of original AI systems spanning runtime control, governance, diagnostic frameworks,
-          self-evolving capability engines, prompt architectures, and research-backed product design.
-          Work includes enterprise-facing systems, research artifacts, curriculum development, and
-          deployable software surfaces.
-        </p>
-      </div>
-
-      <div class="section two-col">
-        <div>
-          <h3>Core Areas</h3>
-          <ul>
-            <li>AI runtime governance and security</li>
-            <li>Prompt injection and adversarial detection systems</li>
-            <li>Self-evolving capability engines</li>
-            <li>Quantitative modeling and behavioral analysis</li>
-            <li>System design, architecture, and product translation</li>
-          </ul>
+      <div class="top">
+        <div class="stack">
+          <div class="eyebrow" style="margin-bottom:10px;">Professional Summary</div>
+          <p>
+            Founder of The Forgotten Code Research Institute and builder of West-OS, CHIMERA CORE,
+            Mirror Protocol, and a wider family of AI systems, research artifacts, and operating frameworks.
+            Work spans runtime AI governance, system design, quantitative reasoning, prompt architectures,
+            and translation from original research into deployable software.
+          </p>
+          <div class="callout">
+            Current public flagship: <strong>West-OS</strong>, a runtime governance and security layer for AI systems
+            that controls requests, context, tools, outputs, credentials, and deployment state together.
+          </div>
         </div>
-        <div>
-          <h3>Current Flagship Systems</h3>
-          <ul>
-            <li>West-OS</li>
-            <li>CHIMERA CORE</li>
-            <li>Mirror Protocol</li>
-            <li>The West Method</li>
-          </ul>
+        <div class="stack">
+          <div class="eyebrow" style="margin-bottom:10px;">Contact</div>
+          <div class="contact-list">
+            <div>Email: <a href="mailto:theforgottencode780@gmail.com">theforgottencode780@gmail.com</a></div>
+            <div>Phone: <a href="tel:4233888304">423-388-8304</a></div>
+            <div>GitHub: <a href="https://github.com/Jennaleighwilder" target="_blank" rel="noopener">Jennaleighwilder</a></div>
+            <div>LinkedIn: <a href="https://www.linkedin.com/in/jennifer-west-60a7a595/" target="_blank" rel="noopener">Jennifer West</a></div>
+          </div>
         </div>
       </div>
 
       <div class="section">
         <h3>Selected Achievements</h3>
-        <ul>
-          <li>600+ artifacts shipped in a single year across software, systems, curricula, and research outputs</li>
-          <li>15+ AI systems and engines built across governance, diagnostics, and capability design</li>
-          <li>9 research papers and whitepapers across AI systems, consciousness, and quantitative methods</li>
-          <li>50+ client-facing reports, implementations, or system deployments</li>
-        </ul>
+        <div class="mini-grid">
+          <div class="mini-card">
+            <strong>600+</strong>
+            <span>Artifacts shipped across software, systems, curricula, and research outputs</span>
+          </div>
+          <div class="mini-card">
+            <strong>15+</strong>
+            <span>AI systems and engines built across governance, diagnostics, and capability design</span>
+          </div>
+          <div class="mini-card">
+            <strong>9</strong>
+            <span>Research papers and whitepapers across AI systems and quantitative methods</span>
+          </div>
+          <div class="mini-card">
+            <strong>50+</strong>
+            <span>Client-facing reports, implementations, or system deliveries</span>
+          </div>
+        </div>
       </div>
 
-      <div class="section">
-        <h3>Technical and Research Domains</h3>
-        <div class="pill-row">
-          <span class="pill">Runtime AI security</span>
-          <span class="pill">System architecture</span>
-          <span class="pill">Governance layers</span>
-          <span class="pill">Prompt engineering</span>
-          <span class="pill">Quantitative research</span>
-          <span class="pill">Diagnostics</span>
-          <span class="pill">Behavioral systems</span>
-          <span class="pill">Product strategy</span>
+      <div class="section two-col">
+        <div>
+          <h3>Core Practice Areas</h3>
+          <ul>
+            <li>Runtime AI governance and security</li>
+            <li>Prompt injection and adversarial detection systems</li>
+            <li>Self-evolving capability engines</li>
+            <li>Recursive diagnostics and identity frameworks</li>
+            <li>Quantitative and behavioral system design</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Signature Systems</h3>
+          <ul>
+            <li>West-OS</li>
+            <li>CHIMERA CORE</li>
+            <li>Mirror Protocol</li>
+            <li>The West Method</li>
+            <li>Cognitive Archaeology Engine</li>
+            <li>Emergence Engine</li>
+          </ul>
         </div>
       </div>
 
       <div class="section">
-        <h3>Contact</h3>
-        <p>Email: <a href="mailto:theforgottencode780@gmail.com">theforgottencode780@gmail.com</a></p>
-        <p>Phone: <a href="tel:4233888304">423-388-8304</a></p>
-        <p class="footer-note">
-          This page is a public professional profile. A fuller CV, evaluator packet, or system dossier can be shared directly on request.
+        <h3>Research and Product Themes</h3>
+        <div class="pill-row">
+          <span class="pill">Runtime security</span>
+          <span class="pill">System architecture</span>
+          <span class="pill">Prompt systems</span>
+          <span class="pill">Quantitative research</span>
+          <span class="pill">Diagnostics</span>
+          <span class="pill">Behavioral systems</span>
+          <span class="pill">AI product design</span>
+          <span class="pill">Research translation</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Public Notes</h3>
+        <p>
+          This page is the public-facing version of a broader CV and technical dossier. For a fuller evaluator packet,
+          system packet, or buyer packet, request it directly by email.
         </p>
       </div>
     </div>
