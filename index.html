@@ -1,989 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Forgotten Code Research Institute</title>
-<meta name="description" content="West-OS — Runtime Governance and Security Layer for AI Systems. Built by Jennifer Leigh West, The Forgotten Code Research Institute.">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Mono:wght@400;500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Forgotten Code Research Institute</title>
+  <meta name="description" content="The Forgotten Code Research Institute. Enter the institute.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #030303;
+      --fg: #f6f1e7;
+      --muted: rgba(246, 241, 231, 0.68);
+      --line: rgba(246, 241, 231, 0.18);
+      --glow: rgba(255, 255, 255, 0.08);
+    }
 
-/* ── Reset & Variables ─────────────────────────────────────────────────────── */
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-:root{
-  --ink:      #0E0E0E;
-  --paper:    #F5F1EA;
-  --cream:    #FAF7F1;
-  --teal:     #0A6B58;
-  --teal-lt:  #D4EDE8;
-  --teal-glow:#00C4A7;
-  --rust:     #8B3A1A;
-  --rust-lt:  #F4E8E2;
-  --gold:     #8B6914;
-  --gold-lt:  #F5EDD4;
-  --charcoal: #2C2C2C;
-  --muted:    #6B6560;
-  --border:   #DDD8D0;
-  --mono:     'DM Mono', monospace;
-  --serif:    'Cormorant Garamond', serif;
-  --display:  'Syne', sans-serif;
-}
+    html, body {
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--fg);
+    }
 
-html{scroll-behavior:smooth}
-body{
-  background:var(--paper);
-  color:var(--ink);
-  font-family:var(--serif);
-  line-height:1.6;
-  overflow-x:hidden;
-}
+    body {
+      font-family: "Inter", sans-serif;
+      overflow: hidden;
+    }
 
-/* grain texture */
-body::after{
-  content:'';
-  position:fixed;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events:none;z-index:9999;opacity:0.4;
-}
+    .screen {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px;
+      background:
+        radial-gradient(circle at 50% 36%, var(--glow), transparent 28%),
+        linear-gradient(180deg, #060606 0%, #020202 100%);
+      position: relative;
+      isolation: isolate;
+    }
 
-/* ── Navigation ────────────────────────────────────────────────────────────── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1.25rem 3rem;
-  background:rgba(245,241,234,0.92);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);
-}
-.nav-logo{
-  font-family:var(--display);
-  font-size:0.85rem;font-weight:800;
-  letter-spacing:0.06em;color:var(--ink);
-  text-decoration:none;
-}
-.nav-logo span{color:var(--teal);}
-.nav-links{
-  display:flex;gap:2.5rem;align-items:center;
-  list-style:none;
-}
-.nav-links a{
-  font-family:var(--mono);font-size:0.68rem;
-  letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--muted);text-decoration:none;
-  transition:color 0.2s;
-}
-.nav-links a:hover{color:var(--teal);}
-.nav-cta{
-  background:var(--teal)!important;color:#fff!important;
-  padding:0.45rem 1.1rem;border-radius:4px;
-}
-.nav-cta:hover{opacity:0.88;}
+    .screen::before,
+    .screen::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
 
-/* ── Hero ──────────────────────────────────────────────────────────────────── */
-.hero{
-  min-height:100vh;
-  display:flex;flex-direction:column;justify-content:center;
-  padding:9rem 3rem 5rem;
-  position:relative;
-  overflow:hidden;
-}
+    .screen::before {
+      background:
+        linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%);
+      opacity: 0.4;
+      transform: scaleX(0.65);
+    }
 
-.hero-kicker{
-  font-family:var(--mono);font-size:0.7rem;
-  letter-spacing:0.25em;text-transform:uppercase;
-  color:var(--teal);margin-bottom:1.5rem;
-  display:flex;align-items:center;gap:0.75rem;
-}
-.hero-kicker::before{
-  content:'';width:32px;height:1px;background:var(--teal);
-}
+    .screen::after {
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.06) 0, transparent 1px),
+        radial-gradient(circle at 70% 40%, rgba(255,255,255,0.05) 0, transparent 1px),
+        radial-gradient(circle at 40% 80%, rgba(255,255,255,0.04) 0, transparent 1px);
+      background-size: 220px 220px;
+      opacity: 0.18;
+      mix-blend-mode: screen;
+    }
 
-.hero-title{
-  font-family:var(--display);
-  font-size:clamp(3.5rem, 7vw, 7rem);
-  font-weight:800;line-height:1.0;
-  color:var(--ink);margin-bottom:1.5rem;
-  max-width:900px;
-}
-.hero-title em{
-  font-style:italic;font-family:var(--serif);
-  color:var(--teal);font-weight:300;
-}
+    .frame {
+      width: min(1100px, 100%);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
 
-.hero-sub{
-  font-size:1.3rem;font-weight:300;
-  color:var(--muted);max-width:640px;
-  line-height:1.7;margin-bottom:3rem;
-  font-family:var(--serif);
-}
+    .kicker {
+      font-size: 12px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
 
-.hero-actions{
-  display:flex;gap:1rem;flex-wrap:wrap;
-  margin-bottom:4rem;
-}
-.btn-primary{
-  background:var(--teal);color:#fff;
-  padding:0.9rem 2rem;border-radius:6px;
-  font-family:var(--display);font-size:0.9rem;font-weight:700;
-  text-decoration:none;display:inline-block;
-  transition:transform 0.2s,box-shadow 0.2s;
-  box-shadow:0 4px 20px rgba(10,107,88,0.25);
-}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(10,107,88,0.35);}
-.btn-secondary{
-  border:1.5px solid var(--border);color:var(--charcoal);
-  padding:0.9rem 2rem;border-radius:6px;
-  font-family:var(--display);font-size:0.9rem;font-weight:700;
-  text-decoration:none;display:inline-block;
-  transition:border-color 0.2s,color 0.2s;
-  background:transparent;
-}
-.btn-secondary:hover{border-color:var(--teal);color:var(--teal);}
+    h1 {
+      font-family: "Bodoni Moda", serif;
+      font-weight: 700;
+      font-size: clamp(48px, 10vw, 132px);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      text-wrap: balance;
+      margin: 0 auto;
+      max-width: 12ch;
+      text-shadow: 0 0 24px rgba(255,255,255,0.05);
+    }
 
-/* proof strip */
-.hero-proof{
-  display:flex;gap:2.5rem;flex-wrap:wrap;
-  border-top:1px solid var(--border);
-  padding-top:2rem;
-}
-.proof-stat{display:flex;flex-direction:column;gap:0.2rem;}
-.proof-num{
-  font-family:var(--display);font-size:1.8rem;font-weight:800;
-  color:var(--teal);line-height:1;
-}
-.proof-lbl{
-  font-family:var(--mono);font-size:0.6rem;
-  letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--muted);
-}
+    .sub {
+      margin: 28px auto 0;
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+    }
 
-/* decorative lines */
-.hero::before{
-  content:'';
-  position:absolute;right:-100px;top:20%;
-  width:500px;height:500px;
-  border:1px solid rgba(10,107,88,0.08);
-  border-radius:50%;
-  pointer-events:none;
-}
-.hero::after{
-  content:'';
-  position:absolute;right:-50px;top:15%;
-  width:600px;height:600px;
-  border:1px solid rgba(10,107,88,0.05);
-  border-radius:50%;
-  pointer-events:none;
-}
+    .actions {
+      margin-top: 44px;
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
-/* ── Section base ──────────────────────────────────────────────────────────── */
-section{padding:6rem 3rem;}
-.section-kicker{
-  font-family:var(--mono);font-size:0.65rem;
-  letter-spacing:0.25em;text-transform:uppercase;
-  color:var(--teal);margin-bottom:1rem;
-}
-.section-title{
-  font-family:var(--display);font-size:clamp(2rem,4vw,3.5rem);
-  font-weight:800;color:var(--ink);margin-bottom:1.5rem;
-  line-height:1.1;
-}
-.section-body{
-  font-size:1.15rem;font-weight:300;
-  color:var(--muted);line-height:1.8;max-width:640px;
-}
+    .enter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 180px;
+      padding: 14px 24px;
+      border: 1px solid var(--fg);
+      color: var(--fg);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      font-size: 12px;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
 
-/* ── West-OS product section ───────────────────────────────────────────────── */
-.product{background:var(--ink);color:var(--paper);}
-.product .section-title{color:var(--paper);}
-.product .section-body{color:#999;}
-.product .section-kicker{color:var(--teal-glow);}
+    .enter:hover {
+      background: var(--fg);
+      color: var(--bg);
+      transform: translateY(-1px);
+    }
 
-.product-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:1.5rem;margin-top:3rem;
-}
-.product-card{
-  background:#161616;border:1px solid #242424;
-  border-radius:10px;padding:2rem;
-  position:relative;overflow:hidden;
-  transition:border-color 0.3s;
-}
-.product-card:hover{border-color:var(--teal);}
-.product-card::before{
-  content:'';
-  position:absolute;top:0;left:0;right:0;height:2px;
-  background:var(--teal);opacity:0;
-  transition:opacity 0.3s;
-}
-.product-card:hover::before{opacity:1;}
-.card-num{
-  font-family:var(--mono);font-size:0.65rem;
-  letter-spacing:0.2em;color:var(--teal-glow);
-  margin-bottom:0.75rem;
-}
-.card-title{
-  font-family:var(--display);font-size:1.1rem;font-weight:700;
-  color:var(--paper);margin-bottom:0.6rem;
-}
-.card-title em{
-  font-family:var(--serif);font-style:italic;
-  color:var(--teal-glow);font-weight:300;
-}
-.card-body{
-  font-size:0.88rem;color:#777;line-height:1.6;
-}
+    .note {
+      margin-top: 18px;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(246, 241, 231, 0.5);
+    }
 
-/* ── Proof section ─────────────────────────────────────────────────────────── */
-.proof-section{background:var(--cream);}
+    .footer {
+      position: absolute;
+      left: 32px;
+      right: 32px;
+      bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(246, 241, 231, 0.42);
+      z-index: 1;
+    }
 
-.proof-table{
-  width:100%;border-collapse:collapse;
-  margin-top:2.5rem;font-family:var(--mono);
-}
-.proof-table th{
-  text-align:left;padding:0.75rem 1rem;
-  font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;
-  color:var(--muted);border-bottom:2px solid var(--teal);
-}
-.proof-table td{
-  padding:0.85rem 1rem;font-size:0.82rem;
-  border-bottom:1px solid var(--border);
-  vertical-align:middle;
-}
-.proof-table tr:hover td{background:var(--teal-lt);}
-.proof-pass{color:var(--teal);font-weight:500;}
-.proof-num-cell{
-  font-size:1.1rem;font-weight:500;color:var(--teal);
-}
-
-.proof-callout{
-  margin-top:2rem;padding:1.25rem 1.5rem;
-  border-left:4px solid var(--teal);
-  background:var(--teal-lt);border-radius:0 8px 8px 0;
-  font-family:var(--mono);font-size:0.8rem;color:var(--teal);
-}
-
-/* ── Services grid ─────────────────────────────────────────────────────────── */
-.services-section{background:var(--paper);}
-.services-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:1px;background:var(--border);
-  margin-top:3rem;border:1px solid var(--border);
-  border-radius:10px;overflow:hidden;
-}
-.service-cell{
-  background:var(--cream);
-  padding:1.25rem;
-  transition:background 0.2s;
-}
-.service-cell:hover{background:var(--teal-lt);}
-.svc-num{
-  font-family:var(--mono);font-size:0.6rem;
-  color:var(--teal);letter-spacing:0.1em;
-  margin-bottom:0.4rem;
-}
-.svc-name{
-  font-family:var(--display);font-size:0.9rem;
-  font-weight:700;color:var(--ink);margin-bottom:0.25rem;
-}
-.svc-desc{
-  font-size:0.75rem;color:var(--muted);line-height:1.4;
-  font-family:var(--serif);
-}
-.svc-new{
-  display:inline-block;margin-top:0.4rem;
-  font-family:var(--mono);font-size:0.55rem;
-  letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--teal);background:var(--teal-lt);
-  padding:0.15rem 0.4rem;border-radius:2px;
-}
-
-/* ── Pricing ───────────────────────────────────────────────────────────────── */
-.pricing-section{background:var(--ink);}
-.pricing-section .section-title{color:var(--paper);}
-.pricing-section .section-body{color:#888;}
-.pricing-section .section-kicker{color:var(--teal-glow);}
-
-.pricing-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:1.5rem;margin-top:3rem;
-}
-.tier-card{
-  border:1px solid #282828;border-radius:12px;
-  padding:2.5rem 2rem;background:#111;
-  position:relative;transition:border-color 0.3s;
-}
-.tier-card:hover{border-color:var(--teal);}
-.tier-card.featured{border-color:var(--teal);background:#0a1a17;}
-.tier-badge{
-  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
-  background:var(--teal);color:#fff;
-  font-family:var(--mono);font-size:0.6rem;
-  letter-spacing:0.15em;padding:0.25rem 0.75rem;border-radius:20px;
-  text-transform:uppercase;
-}
-.tier-name{
-  font-family:var(--display);font-size:1.3rem;font-weight:800;
-  color:var(--paper);margin-bottom:0.5rem;
-}
-.tier-price{
-  font-family:var(--display);font-size:2rem;font-weight:800;
-  color:var(--teal-glow);margin-bottom:0.25rem;line-height:1;
-}
-.tier-period{
-  font-family:var(--mono);font-size:0.7rem;
-  color:#555;margin-bottom:1.5rem;
-}
-.tier-buyer{
-  font-size:0.88rem;color:#888;
-  margin-bottom:1.5rem;line-height:1.5;
-  font-family:var(--serif);
-}
-.tier-features{list-style:none;display:flex;flex-direction:column;gap:0.6rem;}
-.tier-features li{
-  font-family:var(--mono);font-size:0.75rem;color:#666;
-  display:flex;gap:0.5rem;align-items:flex-start;
-}
-.tier-features li::before{content:'\2713';color:var(--teal);flex-shrink:0;}
-
-/* ── Lead capture / contact ────────────────────────────────────────────────── */
-.contact-section{background:var(--paper);}
-.contact-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:5rem;margin-top:3rem;
-  align-items:start;
-}
-
-.form-group{display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.25rem;}
-.form-group label{
-  font-family:var(--mono);font-size:0.62rem;
-  letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--muted);
-}
-.form-group input,
-.form-group select,
-.form-group textarea{
-  background:var(--cream);
-  border:1.5px solid var(--border);
-  border-radius:6px;padding:0.75rem 1rem;
-  font-family:var(--serif);font-size:1rem;
-  color:var(--ink);outline:none;
-  transition:border-color 0.2s;
-  width:100%;
-}
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus{border-color:var(--teal);}
-.form-group textarea{resize:vertical;min-height:120px;}
-.form-group select{cursor:pointer;appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B6560' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 1rem center;
-}
-
-.form-submit{
-  width:100%;padding:1rem;
-  background:var(--teal);color:#fff;border:none;
-  border-radius:6px;cursor:pointer;
-  font-family:var(--display);font-size:1rem;font-weight:700;
-  transition:opacity 0.2s,transform 0.2s;
-}
-.form-submit:hover{opacity:0.88;transform:translateY(-1px);}
-
-.form-note{
-  font-family:var(--mono);font-size:0.62rem;
-  color:var(--muted);margin-top:0.75rem;
-  letter-spacing:0.05em;text-align:center;
-}
-
-.contact-info-block{display:flex;flex-direction:column;gap:2rem;}
-.info-item{border-left:3px solid var(--teal);padding-left:1.25rem;}
-.info-label{
-  font-family:var(--mono);font-size:0.6rem;
-  letter-spacing:0.15em;text-transform:uppercase;
-  color:var(--teal);margin-bottom:0.4rem;
-}
-.info-value{
-  font-family:var(--serif);font-size:1.05rem;
-  color:var(--charcoal);line-height:1.5;
-}
-.info-value a{color:var(--teal);text-decoration:none;}
-.info-value a:hover{text-decoration:underline;}
-
-.offer-box{
-  background:var(--teal-lt);border:1px solid var(--teal);
-  border-radius:10px;padding:2rem;margin-top:2rem;
-}
-.offer-box-title{
-  font-family:var(--display);font-size:1rem;font-weight:700;
-  color:var(--teal);margin-bottom:0.75rem;
-}
-.offer-list{
-  list-style:none;display:flex;flex-direction:column;gap:0.5rem;
-}
-.offer-list li{
-  font-family:var(--serif);font-size:0.9rem;color:var(--charcoal);
-  display:flex;gap:0.5rem;
-}
-.offer-list li::before{content:'\2192';color:var(--teal);}
-
-/* ── Footer ────────────────────────────────────────────────────────────────── */
-footer{
-  background:var(--ink);
-  padding:4rem 3rem 2rem;
-  border-top:1px solid #222;
-}
-.footer-grid{
-  display:grid;grid-template-columns:2fr 1fr 1fr;
-  gap:4rem;margin-bottom:3rem;
-}
-.footer-brand .brand-name{
-  font-family:var(--display);font-size:1.1rem;font-weight:800;
-  color:var(--paper);margin-bottom:0.75rem;
-}
-.footer-brand .brand-name span{color:var(--teal-glow);}
-.footer-brand p{
-  font-family:var(--serif);font-size:0.9rem;
-  color:#666;line-height:1.6;max-width:320px;
-}
-.footer-col h4{
-  font-family:var(--mono);font-size:0.62rem;
-  letter-spacing:0.2em;text-transform:uppercase;
-  color:var(--teal-glow);margin-bottom:1.25rem;
-}
-.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.6rem;}
-.footer-col ul li a{
-  font-family:var(--serif);font-size:0.9rem;
-  color:#666;text-decoration:none;
-  transition:color 0.2s;
-}
-.footer-col ul li a:hover{color:var(--paper);}
-
-.footer-bottom{
-  border-top:1px solid #1a1a1a;padding-top:1.5rem;
-  display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:1rem;
-}
-.footer-bottom p{
-  font-family:var(--mono);font-size:0.62rem;
-  color:#444;letter-spacing:0.05em;
-}
-.footer-bottom .trust-link{
-  font-family:var(--mono);font-size:0.62rem;
-  color:var(--teal-glow);text-decoration:none;
-}
-
-/* ── Animations ────────────────────────────────────────────────────────────── */
-.fade-up{
-  opacity:0;transform:translateY(24px);
-  animation:fadeUp 0.7s ease forwards;
-}
-@keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
-.delay-1{animation-delay:0.1s;}
-.delay-2{animation-delay:0.2s;}
-.delay-3{animation-delay:0.3s;}
-.delay-4{animation-delay:0.4s;}
-.delay-5{animation-delay:0.5s;}
-
-/* scroll reveal */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
-.reveal.visible{opacity:1;transform:translateY(0);}
-
-/* ── Responsive ────────────────────────────────────────────────────────────── */
-@media(max-width:900px){
-  nav{padding:1rem 1.5rem;}
-  .nav-links{display:none;}
-  .hero{padding:8rem 1.5rem 4rem;}
-  section{padding:4rem 1.5rem;}
-  .product-grid,.pricing-grid,.contact-grid,.footer-grid{grid-template-columns:1fr;}
-  .services-grid{grid-template-columns:repeat(2,1fr);}
-  .footer-grid{gap:2rem;}
-}
-@media(max-width:600px){
-  .services-grid{grid-template-columns:1fr;}
-  .hero-proof{gap:1.5rem;}
-}
-</style>
+    @media (max-width: 720px) {
+      .footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
-
-<!-- ── Navigation ─────────────────────────────────────────────────────────── -->
-<nav>
-  <a class="nav-logo" href="#"><span>TFCRI</span> · West-OS</a>
-  <ul class="nav-links">
-    <li><a href="#product">Product</a></li>
-    <li><a href="#proof">Proof</a></li>
-    <li><a href="#services">Architecture</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#contact" class="nav-cta">Get in touch</a></li>
-  </ul>
-</nav>
-
-<!-- ── Hero ──────────────────────────────────────────────────────────────── -->
-<section class="hero" id="home">
-  <div class="hero-kicker fade-up">The Forgotten Code Research Institute</div>
-
-  <h1 class="hero-title fade-up delay-1">
-    Runtime governance<br>for <em>AI systems</em><br>that take action.
-  </h1>
-
-  <p class="hero-sub fade-up delay-2">
-    West-OS sits in front of your AI deployment and governs every request,
-    tool call, and output — before harm is possible.
-    Not a prompt filter. A runtime control system.
-  </p>
-
-  <div class="hero-actions fade-up delay-3">
-    <a href="#contact" class="btn-primary">Request a pilot</a>
-    <a href="#proof" class="btn-secondary">See the proof</a>
-  </div>
-
-  <div class="hero-proof fade-up delay-4">
-    <div class="proof-stat">
-      <span class="proof-num">30/30</span>
-      <span class="proof-lbl">Golden suite — perfect</span>
-    </div>
-    <div class="proof-stat">
-      <span class="proof-num">0/1,000</span>
-      <span class="proof-lbl">False positives</span>
-    </div>
-    <div class="proof-stat">
-      <span class="proof-num">99.25%</span>
-      <span class="proof-lbl">Mutation coverage</span>
-    </div>
-    <div class="proof-stat">
-      <span class="proof-num">16</span>
-      <span class="proof-lbl">Active services</span>
-    </div>
-    <div class="proof-stat">
-      <span class="proof-num">99.96%</span>
-      <span class="proof-lbl">Live sweep accuracy</span>
-    </div>
-  </div>
-</section>
-
-<!-- ── Product ────────────────────────────────────────────────────────────── -->
-<section class="product" id="product">
-  <div class="section-kicker reveal">What it is</div>
-  <h2 class="section-title reveal">Not a firewall.<br>A governance layer.</h2>
-  <p class="section-body reveal">
-    West-OS governs the full operational path an AI system takes from request to action —
-    before the model ever sees the message. Most AI security products address a slice of the problem.
-    West-OS unifies what they leave separate.
-  </p>
-
-  <div class="product-grid">
-    <div class="product-card reveal">
-      <div class="card-num">01 — REQUEST GOVERNANCE</div>
-      <div class="card-title">Every message adjudicated <em>before</em> the AI sees it</div>
-      <div class="card-body">Six-dimensional threat address scoring across Authority, Persona, Override, Trust, Template, and Hypothetical attack families simultaneously. Attacks have shapes, not just words — rephrase the attack and the shape stays the same.</div>
-    </div>
-    <div class="product-card reveal">
-      <div class="card-num">02 — CONTEXT SCANNING</div>
-      <div class="card-title">Text · PDF · DOCX · <em>Image OCR</em></div>
-      <div class="card-body">Attacks embedded in documents are as dangerous as typed ones. West-OS extracts and scans all four formats through the same detection pipeline. A malicious instruction in a PDF gets caught identically to a typed override attempt.</div>
-    </div>
-    <div class="product-card reveal">
-      <div class="card-num">03 — TOOL VALIDATION</div>
-      <div class="card-title">No tool fires without <em>authorization</em></div>
-      <div class="card-body">AI agents with tool access can be manipulated into destructive actions. Every tool call is validated before it executes. High-risk actions require explicit authorization. The blast radius of any manipulation is contained.</div>
-    </div>
-    <div class="product-card reveal">
-      <div class="card-num">04 — DEPLOYMENT CONTROL</div>
-      <div class="card-title">Signed tokens. <em>Instant revocation.</em></div>
-      <div class="card-body">Every authorized deployment carries a signed token. Revocation takes effect globally in under ten seconds. Tamper-evident audit chain. DMCA-ready evidence exported in under three seconds. Unauthorized copies cannot start.</div>
-    </div>
-    <div class="product-card reveal">
-      <div class="card-num">05 — BIOLOGICAL MEMORY</div>
-      <div class="card-title">The <em>mycelium</em> layer remembers</div>
-      <div class="card-body">Modeled on fungal network biology. Spores store high-threat signals for seven days. Chemotropism weights threat sources automatically. Anastomosis fuses signals from trusted engines only. The system learns without retraining.</div>
-    </div>
-    <div class="product-card reveal">
-      <div class="card-num">06 — SELF-HARDENING</div>
-      <div class="card-title">The system finds its own <em>gaps</em></div>
-      <div class="card-body">Assassin Academy — eight specialized red-team agents drill continuously. Ether Spy Hunter sweeps GitHub, ArXiv, and HackerNews hourly for new attack techniques. Slips become test cases. Test cases become patches. Patches become proof.</div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Proof ──────────────────────────────────────────────────────────────── -->
-<section class="proof-section" id="proof">
-  <div class="section-kicker reveal">The proof</div>
-  <h2 class="section-title reveal">Numbers that don't move.</h2>
-  <p class="section-body reveal">
-    Every result is SHA-256 hash-locked and deterministically reproducible.
-    Any evaluator can run <code style="font-family:var(--mono);font-size:0.85em;background:var(--teal-lt);padding:0.1em 0.4em;border-radius:3px;color:var(--teal)">WESTOS_REPRO_MODE=1 make bench</code>
-    and reproduce every number from scratch in under thirty minutes.
-  </p>
-
-  <div class="reveal">
-    <table class="proof-table">
-      <thead>
-        <tr>
-          <th>Suite</th>
-          <th>Result</th>
-          <th>What it proves</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Golden suite</strong></td>
-          <td class="proof-num-cell">30/30</td>
-          <td>Every attack family caught. Accuracy 1.0000. Errors: zero. Strict gating — any error forces rc=1.</td>
-          <td class="proof-pass">✓ Unbroken</td>
-        </tr>
-        <tr>
-          <td><strong>Benign suite</strong></td>
-          <td class="proof-num-cell">0/1,000</td>
-          <td>Real users never incorrectly flagged. The false-positive tradeoff that doesn't exist here.</td>
-          <td class="proof-pass">✓ Zero FP</td>
-        </tr>
-        <tr>
-          <td><strong>Mutation coverage</strong></td>
-          <td class="proof-num-cell">99.25%</td>
-          <td>1,842/1,856 disguised variants caught. Self-hardened up from 99.24% after academy loop closed.</td>
-          <td class="proof-pass">✓ Hardened</td>
-        </tr>
-        <tr>
-          <td><strong>Live sweep</strong></td>
-          <td class="proof-num-cell">99.96%</td>
-          <td>4,692/4,694 correct across the full pipeline. Two semantic floor misses documented.</td>
-          <td class="proof-pass">✓ Production</td>
-        </tr>
-        <tr>
-          <td><strong>Multimodal</strong></td>
-          <td class="proof-num-cell">6/6</td>
-          <td>PDF · DOCX · Image OCR — all input formats catch attacks identically to text.</td>
-          <td class="proof-pass">✓ All formats</td>
-        </tr>
-        <tr>
-          <td><strong>Academy loop</strong></td>
-          <td class="proof-num-cell">10/10</td>
-          <td>First complete immune loop: 10 slips found by assassins, patched, re-verified under gauntlet.</td>
-          <td class="proof-pass">✓ Loop closed</td>
-        </tr>
-        <tr>
-          <td><strong>Security scan</strong></td>
-          <td class="proof-num-cell">0/0/0</td>
-          <td>275 files. Zero critical · zero high · zero medium findings. Full STRIDE threat model.</td>
-          <td class="proof-pass">✓ Clean</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="proof-callout reveal">
-    Release tag: v1.0-rc3-hardened · Commit: 57e59f8e · <a href="#contact" style="color:var(--teal)">Request evaluator packet →</a>
-  </div>
-</section>
-
-<!-- ── Services ───────────────────────────────────────────────────────────── -->
-<section class="services-section" id="services">
-  <div class="section-kicker reveal">Architecture</div>
-  <h2 class="section-title reveal">16 services.<br>One runtime.</h2>
-  <p class="section-body reveal">
-    Every service runs independently on the event bus and publishes signals the governor aggregates into a final decision. Together they form the most complete AI runtime governance system available.
-  </p>
-
-  <div class="services-grid reveal">
-    <div class="service-cell">
-      <div class="svc-num">01</div>
-      <div class="svc-name">Alexandria</div>
-      <div class="svc-desc">Identity drift tracking across sessions</div>
-    </div>
-    <div class="service-cell">
-      <div class="svc-num">02</div>
-      <div class="svc-name">Analysis Router</div>
-      <div class="svc-desc">Routes events to the right service by payload type</div>
-    </div>
-    <div class="service-cell">
-      <div class="svc-num">03</div>
-      <div class="svc-name">CHIMERA</div>
-      <div class="svc-desc">Self-evolving capability engine — 14 capabilities evolved in production</div>
-    </div>
-    <div class="service-cell">
-      <div class="svc-num">04</div>
-      <div class="svc-name">Convergence</div>
-      <div class="svc-desc">Multi-engine agreement detector</div>
-    </div>
-    <div class="service-cell">
-      <div class="svc-num">05</div>
-      <div class="svc-name">Decision Ledger</div>
-      <div class="svc-desc">Permanent audit record of every decision</div>
-    </div>
-    <div class="service-cell">
-      <div class="svc-num">06</div>
-      <div class="svc-name">Maat</div>
-      <div class="svc-desc">Chain-grade evidence packager</div>
-    </div>
-    <div class="service-cell">
-      <div class="svc-num">07</div>
-      <div class="svc-name">Memory</div>
-      <div class="svc-desc">Bus historian for future pattern matching</div>
-    </div>
-    <div class="service-cell">
-      <div class="svc-num">08</div>
-      <div class="svc-name">Mirror Protocol</div>
-      <div class="svc-desc">Coherence and phase analysis</div>
-    </div>
-    <div class="service-cell">
-      <div class="svc-num">09</div>
-      <div class="svc-name">Mycelium</div>
-      <div class="svc-desc">Biological threat memory — spores, chemotropism, anastomosis</div>
-    </div>
-    <div class="service-cell">
-      <div class="svc-num">10</div>
-      <div class="svc-name">Pattern Miner</div>
-      <div class="svc-desc">Recurring pattern detection across full bus history</div>
-    </div>
-    <div class="service-cell">
-      <div class="svc-num">11</div>
-      <div class="svc-name">Persephone</div>
-      <div class="svc-desc">Distortion analyst — slow-burn manipulation detection</div>
-    </div>
-    <div class="service-cell">
-      <div class="svc-num">12</div>
-      <div class="svc-name">Saddle Detection</div>
-      <div class="svc-desc">Phase transition and behavioral state change detector</div>
-    </div>
-    <div class="service-cell">
-      <div class="svc-num">13</div>
-      <div class="svc-name">Saint Jude</div>
-      <div class="svc-desc">Abandonment and medical distress drift analysis</div>
-    </div>
-    <div class="service-cell">
-      <div class="svc-num">14</div>
-      <div class="svc-name">Twelve Deviations</div>
-      <div class="svc-desc">Twelve simultaneous deviation signatures</div>
-    </div>
-    <div class="service-cell">
-      <div class="svc-num">15</div>
-      <div class="svc-name">Ether Spy Hunter <span class="svc-new">New</span></div>
-      <div class="svc-desc">Live threat intelligence — sweeps the world hourly for new attacks</div>
-    </div>
-    <div class="service-cell">
-      <div class="svc-num">16</div>
-      <div class="svc-name">Assassin Academy <span class="svc-new">New</span></div>
-      <div class="svc-desc">8 red-team specialists + world risk monitor (regulation, power grid, politics)</div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Pricing ────────────────────────────────────────────────────────────── -->
-<section class="pricing-section" id="pricing">
-  <div class="section-kicker reveal">Commercial tiers</div>
-  <h2 class="section-title reveal">Deploy in hours.<br>Govern for years.</h2>
-  <p class="section-body reveal" style="color:#888;">
-    Every tier includes the full 16-service runtime, evaluator runbook, benchmark artifacts, and deployment guard. No features locked behind enterprise walls — the architecture is complete at every tier.
-  </p>
-
-  <div class="pricing-grid">
-    <div class="tier-card reveal">
-      <div class="tier-name">Starter</div>
-      <div class="tier-price">$50k–$150k</div>
-      <div class="tier-period">per year</div>
-      <div class="tier-buyer">SaaS companies adding AI to their product. One-command Docker deploy. Zero configuration. Production in hours.</div>
-      <ul class="tier-features">
-        <li>Full 16-service runtime</li>
-        <li>Docker one-command deploy</li>
-        <li>Evaluator runbook included</li>
-        <li>30-day pilot available</li>
-        <li>0/1,000 FP guarantee</li>
-      </ul>
-    </div>
-    <div class="tier-card featured reveal">
-      <div class="tier-badge">Most selected</div>
-      <div class="tier-name">Enterprise</div>
-      <div class="tier-price">$150k–$500k</div>
-      <div class="tier-period">per year</div>
-      <div class="tier-buyer">Financial, healthcare, legal, and regulated industries. Full audit trail, STRIDE threat model, security team sign-off ready.</div>
-      <ul class="tier-features">
-        <li>Everything in Starter</li>
-        <li>Full STRIDE threat model</li>
-        <li>Tamper-evident audit chain</li>
-        <li>DMCA-ready evidence export</li>
-        <li>Deployment guard + revocation</li>
-        <li>Security team briefing</li>
-      </ul>
-    </div>
-    <div class="tier-card reveal">
-      <div class="tier-name">Sovereign</div>
-      <div class="tier-price">$500k–$2M+</div>
-      <div class="tier-period">per engagement</div>
-      <div class="tier-buyer">Government, defense, and critical infrastructure. Air-gapped deployment. Every decision independently verifiable. No cloud dependencies.</div>
-      <ul class="tier-features">
-        <li>Everything in Enterprise</li>
-        <li>Air-gapped capable</li>
-        <li>Full source audit rights</li>
-        <li>Signed deployment tokens</li>
-        <li>On-site deployment support</li>
-        <li>Classified environment ready</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ── Contact / Lead Capture ─────────────────────────────────────────────── -->
-<section class="contact-section" id="contact">
-  <div class="section-kicker reveal">Get in touch</div>
-  <h2 class="section-title reveal">Start with a challenge.</h2>
-  <p class="section-body reveal">
-    Send us your worst prompt injection attempts. Your red team's library.
-    The attacks that broke your last vendor. We run them live and show you every decision.
-  </p>
-
-  <div class="contact-grid">
-    <!-- Form -->
-    <div class="reveal">
-      <form id="contact-form" onsubmit="handleSubmit(event)">
-        <div class="form-group">
-          <label>Full name</label>
-          <input type="text" id="name" placeholder="Your name" required>
-        </div>
-        <div class="form-group">
-          <label>Work email</label>
-          <input type="email" id="email" placeholder="you@company.com" required>
-        </div>
-        <div class="form-group">
-          <label>Company</label>
-          <input type="text" id="company" placeholder="Your organization">
-        </div>
-        <div class="form-group">
-          <label>I am interested in</label>
-          <select id="interest">
-            <option value="">Select one</option>
-            <option value="pilot">30-day pilot evaluation</option>
-            <option value="demo">Live black-box challenge / demo</option>
-            <option value="starter">Starter tier licensing</option>
-            <option value="enterprise">Enterprise tier licensing</option>
-            <option value="sovereign">Sovereign / government deployment</option>
-            <option value="acquisition">Acquisition / investment conversation</option>
-            <option value="research">Research collaboration</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Message (optional)</label>
-          <textarea id="message" placeholder="Tell us about your AI deployment and what you need to protect..."></textarea>
-        </div>
-        <button type="submit" class="form-submit">Send message</button>
-        <p class="form-note">We respond to every inquiry. Usually within 24 hours.</p>
-      </form>
-      <div id="form-success" style="display:none;padding:2rem;background:var(--teal-lt);border:1px solid var(--teal);border-radius:8px;margin-top:1rem;">
-        <p style="font-family:var(--display);font-weight:700;color:var(--teal);margin-bottom:0.5rem;">Message received.</p>
-        <p style="font-family:var(--serif);color:var(--charcoal);">We'll be in touch within 24 hours. If you want the evaluator packet, just say so in your message.</p>
+  <main class="screen">
+    <section class="frame">
+      <div class="kicker">The Institute</div>
+      <h1>The Forgotten Code Research Institute</h1>
+      <p class="sub">
+        Enter when you are ready. The fuller business page, system proof, and contact path are behind the door.
+        More is coming. This is the opening.
+      </p>
+      <div class="actions">
+        <a class="enter" href="/west-os.html">Enter</a>
       </div>
+      <div class="note">More coming soon</div>
+    </section>
+    <div class="footer">
+      <span>West-OS</span>
+      <span>Runtime governance for AI systems</span>
     </div>
-
-    <!-- Info -->
-    <div class="contact-info-block reveal">
-      <div class="info-item">
-        <div class="info-label">Founder</div>
-        <div class="info-value">Jennifer Leigh West<br>The Forgotten Code Research Institute</div>
-      </div>
-      <div class="info-item">
-        <div class="info-label">Email</div>
-        <div class="info-value"><a href="mailto:theforgottencode780@gmail.com">theforgottencode780@gmail.com</a></div>
-      </div>
-      <div class="info-item">
-        <div class="info-label">Phone</div>
-        <div class="info-value"><a href="tel:4233888304">423-388-8304</a></div>
-      </div>
-      <div class="info-item">
-        <div class="info-label">Trust verification</div>
-        <div class="info-value"><a href="#contact" target="_blank">Get in touch →</a></div>
-      </div>
-      <div class="info-item">
-        <div class="info-label">Copyright</div>
-        <div class="info-value" style="font-size:0.85rem;">U.S. Copyright Registration<br>No. 1-14949237971</div>
-      </div>
-
-      <div class="offer-box">
-        <div class="offer-box-title">The offer — live and on the record</div>
-        <ul class="offer-list">
-          <li>Black-box challenge — your prompts, our system</li>
-          <li>Zero-FP proof on your benign messages</li>
-          <li>Deterministic replay — any decision, any time</li>
-          <li>Multimodal test — PDF, DOCX, or image</li>
-          <li>30-minute independent benchmark reproduction</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Footer ─────────────────────────────────────────────────────────────── -->
-<footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <div class="brand-name">The <span>Forgotten Code</span> Research Institute</div>
-      <p>Building runtime governance infrastructure for the AI systems that are taking over production environments. Built from rural Tennessee. Proven in production.</p>
-    </div>
-    <div class="footer-col">
-      <h4>West-OS</h4>
-      <ul>
-        <li><a href="#product">What it is</a></li>
-        <li><a href="#proof">Proof numbers</a></li>
-        <li><a href="#services">16 services</a></li>
-        <li><a href="#pricing">Pricing tiers</a></li>
-        <li><a href="#contact" target="_blank">Trust verification</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Contact</h4>
-      <ul>
-        <li><a href="mailto:theforgottencode780@gmail.com">theforgottencode780@gmail.com</a></li>
-        <li><a href="tel:4233888304">423-388-8304</a></li>
-        <li><a href="#contact">Request pilot</a></li>
-        <li><a href="#contact">Live challenge</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2025–2026 Jennifer Leigh West · The Forgotten Code Research Institute · All rights reserved · v1.0-rc3-hardened</p>
-    <a class="trust-link" href="#contact" target="_blank">Contact us →</a>
-  </div>
-</footer>
-
-<script>
-// Form submission
-function handleSubmit(e) {
-  e.preventDefault();
-  var name     = document.getElementById('name').value;
-  var email    = document.getElementById('email').value;
-  var company  = document.getElementById('company').value;
-  var interest = document.getElementById('interest').value;
-  var message  = document.getElementById('message').value;
-
-  var subject = encodeURIComponent('[West-OS] Inquiry from ' + name + (company ? ' at ' + company : ''));
-  var body    = encodeURIComponent(
-    'Name: ' + name + '\n' +
-    'Email: ' + email + '\n' +
-    'Company: ' + company + '\n' +
-    'Interest: ' + interest + '\n\n' +
-    'Message:\n' + message + '\n\n' +
-    '---\nSubmitted via theforgottencode.com'
-  );
-
-  window.location.href = 'mailto:theforgottencode780@gmail.com?subject=' + subject + '&body=' + body;
-
-  document.getElementById('contact-form').style.display = 'none';
-  document.getElementById('form-success').style.display = 'block';
-}
-
-// Scroll reveal
-var revealEls = document.querySelectorAll('.reveal');
-var observer  = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1 });
-
-revealEls.forEach(function(el) { observer.observe(el); });
-</script>
+  </main>
 </body>
 </html>
