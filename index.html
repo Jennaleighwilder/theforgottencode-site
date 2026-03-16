@@ -4,17 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Forgotten Code Research Institute</title>
-  <meta name="description" content="The Forgotten Code Research Institute. Enter the institute.">
+  <meta name="description" content="The Forgotten Code Research Institute builds original AI systems, runtime governance frameworks, diagnostics, and research-led software.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #030303;
-      --fg: #f6f1e7;
+      --bg: #040404;
+      --panel: #0d0d0d;
+      --panel-alt: #121212;
+      --ink: #f6f1e7;
       --muted: rgba(246, 241, 231, 0.68);
-      --line: rgba(246, 241, 231, 0.18);
+      --line: rgba(246, 241, 231, 0.14);
       --glow: rgba(255, 255, 255, 0.08);
+      --teal: #86d0c1;
+      --warm: #d7b27c;
+      --rose: #b07d97;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
     }
 
     * {
@@ -23,175 +29,831 @@
       padding: 0;
     }
 
-    html, body {
-      min-height: 100%;
-      background: var(--bg);
-      color: var(--fg);
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: "Inter", sans-serif;
-      overflow: hidden;
-    }
-
-    .screen {
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 32px;
+      min-height: 100%;
       background:
-        radial-gradient(circle at 50% 36%, var(--glow), transparent 28%),
-        linear-gradient(180deg, #060606 0%, #020202 100%);
-      position: relative;
-      isolation: isolate;
+        radial-gradient(circle at 80% 20%, rgba(134, 208, 193, 0.06), transparent 18%),
+        radial-gradient(circle at 20% 80%, rgba(176, 125, 151, 0.08), transparent 20%),
+        linear-gradient(180deg, #070707 0%, #020202 100%);
+      color: var(--ink);
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
     }
 
-    .screen::before,
-    .screen::after {
+    body::before {
       content: "";
-      position: absolute;
+      position: fixed;
       inset: 0;
       pointer-events: none;
-    }
-
-    .screen::before {
-      background:
-        linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%);
-      opacity: 0.4;
-      transform: scaleX(0.65);
-    }
-
-    .screen::after {
       background-image:
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.06) 0, transparent 1px),
-        radial-gradient(circle at 70% 40%, rgba(255,255,255,0.05) 0, transparent 1px),
-        radial-gradient(circle at 40% 80%, rgba(255,255,255,0.04) 0, transparent 1px);
+        radial-gradient(circle at 18% 18%, rgba(255,255,255,0.04) 0, transparent 1px),
+        radial-gradient(circle at 72% 42%, rgba(255,255,255,0.04) 0, transparent 1px),
+        radial-gradient(circle at 43% 81%, rgba(255,255,255,0.03) 0, transparent 1px);
       background-size: 220px 220px;
-      opacity: 0.18;
+      opacity: 0.2;
       mix-blend-mode: screen;
     }
 
-    .frame {
-      width: min(1100px, 100%);
-      text-align: center;
+    a {
+      color: inherit;
+    }
+
+    .shell {
+      width: min(1220px, calc(100% - 40px));
+      margin: 0 auto;
       position: relative;
       z-index: 1;
     }
 
-    .kicker {
-      font-size: 12px;
-      letter-spacing: 0.38em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 24px;
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(5, 5, 5, 0.84);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
     }
 
-    h1 {
-      font-family: "Bodoni Moda", serif;
-      font-weight: 700;
-      font-size: clamp(48px, 10vw, 132px);
-      line-height: 0.92;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      text-wrap: balance;
+    .nav-inner {
+      width: min(1220px, calc(100% - 40px));
       margin: 0 auto;
-      max-width: 12ch;
-      text-shadow: 0 0 24px rgba(255,255,255,0.05);
-    }
-
-    .sub {
-      margin: 28px auto 0;
-      max-width: 620px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.8;
-      letter-spacing: 0.04em;
-    }
-
-    .actions {
-      margin-top: 44px;
       display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .enter {
-      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      min-width: 180px;
-      padding: 14px 24px;
-      border: 1px solid var(--fg);
-      color: var(--fg);
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px 0;
+    }
+
+    .brand {
       text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 0.28em;
-      font-size: 12px;
-      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
-    }
-
-    .enter:hover {
-      background: var(--fg);
-      color: var(--bg);
-      transform: translateY(-1px);
-    }
-
-    .note {
-      margin-top: 18px;
       font-size: 12px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(246, 241, 231, 0.5);
+      color: var(--ink);
     }
 
-    .footer {
-      position: absolute;
-      left: 32px;
-      right: 32px;
-      bottom: 24px;
+    .brand span {
+      color: var(--teal);
+    }
+
+    .nav-links {
       display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+    }
+
+    .nav-cta {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(134, 208, 193, 0.4);
+      background: rgba(134, 208, 193, 0.1);
+      color: var(--ink) !important;
+    }
+
+    section {
+      padding: 82px 0;
+    }
+
+    .hero {
+      min-height: calc(100vh - 77px);
+      display: flex;
+      align-items: center;
+      padding: 64px 0 48px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 28px;
+      align-items: end;
+    }
+
+    .kicker {
+      font-size: 11px;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--warm);
+      margin-bottom: 18px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Bodoni Moda", serif;
+      font-weight: 700;
+      line-height: 0.95;
+    }
+
+    h1 {
+      font-size: clamp(52px, 9vw, 120px);
+      max-width: 10ch;
+      text-transform: uppercase;
+      text-wrap: balance;
+      text-shadow: 0 0 24px rgba(255,255,255,0.06);
+    }
+
+    .hero-copy {
+      margin-top: 28px;
+      max-width: 720px;
+      font-size: 20px;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 11px;
+      color: var(--ink);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(246, 241, 231, 0.32);
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: #050505;
+      border-color: var(--ink);
+    }
+
+    .btn-accent {
+      background: linear-gradient(135deg, rgba(134, 208, 193, 0.18), rgba(176, 125, 151, 0.18));
+      border-color: rgba(176, 125, 151, 0.34);
+    }
+
+    .hero-note {
+      margin-top: 22px;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(246, 241, 231, 0.44);
+    }
+
+    .hero-panel,
+    .panel {
+      background:
+        linear-gradient(180deg, rgba(18,18,18,0.98) 0%, rgba(10,10,10,0.94) 100%);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-panel {
+      padding: 26px;
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
       justify-content: space-between;
-      gap: 16px;
+      min-height: 520px;
+    }
+
+    .panel-label {
+      font-size: 10px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(246, 241, 231, 0.46);
+    }
+
+    .hero-panel h2 {
+      font-size: 38px;
+      max-width: 10ch;
+      margin-top: 18px;
+    }
+
+    .hero-panel p {
+      margin-top: 18px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    .mini-stack {
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .mini-card {
+      border: 1px solid rgba(246, 241, 231, 0.08);
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .mini-card strong {
+      display: block;
       font-size: 11px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(246, 241, 231, 0.42);
-      z-index: 1;
+      color: var(--teal);
+      margin-bottom: 6px;
     }
 
-    .footer a {
-      color: inherit;
+    .mini-card span {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .proof-grid,
+    .capability-grid,
+    .page-grid,
+    .engagement-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .proof-grid {
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: 26px;
+    }
+
+    .proof-card {
+      padding: 24px 22px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .proof-card strong {
+      display: block;
+      font-size: 36px;
+      font-family: "Bodoni Moda", serif;
+      color: var(--warm);
+      margin-bottom: 8px;
+    }
+
+    .proof-card span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(34px, 5vw, 62px);
+      max-width: 10ch;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
+      max-width: 720px;
+    }
+
+    .capability-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .capability-card,
+    .page-card,
+    .engagement-card {
+      padding: 24px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(15,15,15,0.96) 0%, rgba(9,9,9,0.92) 100%);
+    }
+
+    .capability-card .num,
+    .page-card .num,
+    .engagement-card .num {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 14px;
+    }
+
+    .capability-card h3,
+    .page-card h3,
+    .engagement-card h3 {
+      font-size: 30px;
+      margin-bottom: 12px;
+      line-height: 1.05;
+    }
+
+    .capability-card p,
+    .page-card p,
+    .engagement-card p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .card-link {
+      display: inline-flex;
+      margin-top: 20px;
       text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 11px;
+      color: var(--ink);
     }
 
-    @media (max-width: 720px) {
-      .footer {
+    .band {
+      padding: 34px;
+      border: 1px solid rgba(134, 208, 193, 0.16);
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at top right, rgba(134, 208, 193, 0.08), transparent 28%),
+        linear-gradient(180deg, rgba(134, 208, 193, 0.06) 0%, rgba(255,255,255,0.02) 100%);
+    }
+
+    .band-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .band-item {
+      padding: 18px 0 0;
+      border-top: 1px solid rgba(246, 241, 231, 0.14);
+    }
+
+    .band-item strong {
+      display: block;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+
+    .band-item span {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .page-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .engagement-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .closing {
+      padding-bottom: 100px;
+    }
+
+    .closing-panel {
+      padding: 36px;
+      border-radius: 30px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 0% 100%, rgba(176, 125, 151, 0.09), transparent 22%),
+        linear-gradient(180deg, rgba(18,18,18,0.96) 0%, rgba(9,9,9,0.96) 100%);
+    }
+
+    .closing-panel h2 {
+      font-size: clamp(34px, 5vw, 60px);
+      max-width: 10ch;
+    }
+
+    .closing-panel p {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
+      margin-top: 18px;
+    }
+
+    .closing-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .closing-meta div {
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .closing-meta strong {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--warm);
+      margin-bottom: 6px;
+    }
+
+    .closing-meta span,
+    footer {
+      color: var(--muted);
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 0 34px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .footer-row {
+      width: min(1220px, calc(100% - 40px));
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .section-head,
+      .page-grid,
+      .proof-grid,
+      .capability-grid,
+      .engagement-grid,
+      .band-grid,
+      .closing-meta {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-panel {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav-inner {
+        align-items: flex-start;
         flex-direction: column;
-        align-items: center;
-        text-align: center;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 36px;
+      }
+
+      .hero-grid,
+      .section-head,
+      .proof-grid,
+      .capability-grid,
+      .page-grid,
+      .engagement-grid,
+      .band-grid,
+      .closing-meta {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      h1 {
+        font-size: clamp(44px, 15vw, 82px);
+      }
+
+      .hero-copy,
+      .section-head p,
+      .closing-panel p {
+        font-size: 17px;
       }
     }
   </style>
 </head>
 <body>
-  <main class="screen">
-    <section class="frame">
-      <div class="kicker">The Institute</div>
-      <h1>The Forgotten Code Research Institute</h1>
-      <p class="sub">
-        Enter when you are ready. The fuller business page, system proof, and contact path are behind the door.
-        More is coming. This is the opening.
-      </p>
-      <div class="actions">
-        <a class="enter" href="west-os.html">Enter</a>
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="./"><span>TFCRI</span> · Institute</a>
+      <div class="nav-links">
+        <a href="#capabilities">Capabilities</a>
+        <a href="#systems">Systems</a>
+        <a href="#pages">Pages</a>
+        <a href="#engage">Engage</a>
+        <a href="west-os.html">West-OS</a>
+        <a href="#contact" class="nav-cta">Contact</a>
       </div>
-      <div class="note">More coming soon</div>
-    </section>
-    <div class="footer">
-      <span><a href="west-os.html">West-OS</a> · <a href="about.html">About</a> · <a href="portfolio.html">Portfolio</a></span>
-      <span>Runtime governance for AI systems</span>
     </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="reveal visible">
+          <div class="kicker">Business Site</div>
+          <h1>The Forgotten Code Research Institute</h1>
+          <p class="hero-copy">
+            A research-led business building original AI systems, runtime governance layers, diagnostics,
+            and deployment architecture. This is the professional front door for the institute, the work,
+            and the systems underneath it.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="west-os.html">Enter West-OS</a>
+            <a class="btn btn-accent" href="portfolio.html">View Portfolio</a>
+            <a class="btn" href="about.html">Read About</a>
+            <a class="btn" href="#contact">Start a Conversation</a>
+          </div>
+          <div class="hero-note">Original systems. Research proof. Client-facing implementation.</div>
+        </div>
+
+        <aside class="hero-panel reveal">
+          <div>
+            <div class="panel-label">Inside The Institute</div>
+            <h2>Built for work that needs rigor, evidence, and original architecture.</h2>
+            <p>
+              The institute translates unusual research depth into professional delivery: product framing,
+              governance design, proof artifacts, diagnostics, architecture strategy, and system narrative.
+            </p>
+          </div>
+          <div class="mini-stack">
+            <div class="mini-card">
+              <strong>Flagship</strong>
+              <span>West-OS anchors the public front: runtime governance and security for AI systems.</span>
+            </div>
+            <div class="mini-card">
+              <strong>Public Pages</strong>
+              <span>About, Resume, Portfolio, and West-OS already exist here and are now tied into a full homepage.</span>
+            </div>
+            <div class="mini-card">
+              <strong>Best Fit</strong>
+              <span>Founders, researchers, law firms, operators, and teams with complex, sensitive, or high-trust system needs.</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell">
+        <div class="section-head reveal">
+          <h2>Proof and operating range.</h2>
+          <p>
+            The site now opens with business substance, not just an entry screen. These numbers carry over the
+            same public proof language already present in the supporting pages.
+          </p>
+        </div>
+        <div class="proof-grid">
+          <div class="proof-card reveal">
+            <strong>15+</strong>
+            <span>AI systems and engines spanning governance, diagnostics, capability design, and research translation.</span>
+          </div>
+          <div class="proof-card reveal">
+            <strong>600+</strong>
+            <span>Artifacts shipped across software, systems, curricula, and research outputs.</span>
+          </div>
+          <div class="proof-card reveal">
+            <strong>9</strong>
+            <span>Research papers and whitepapers across quantitative methods and AI systems work.</span>
+          </div>
+          <div class="proof-card reveal">
+            <strong>50+</strong>
+            <span>Client-facing outputs, implementations, or system deliveries translated into usable work.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="capabilities">
+      <div class="shell">
+        <div class="section-head reveal">
+          <h2>Capabilities the business actually offers.</h2>
+          <p>
+            The goal is not generic consulting language. It is clear, professional positioning for the kinds
+            of work the institute can credibly take on right now.
+          </p>
+        </div>
+        <div class="capability-grid">
+          <article class="capability-card reveal">
+            <span class="num">01 · Governance</span>
+            <h3>AI Runtime Governance</h3>
+            <p>System rules, oversight layers, enforcement logic, risk controls, and output governance for tools that need trustworthy behavior in live environments.</p>
+          </article>
+          <article class="capability-card reveal">
+            <span class="num">02 · Diagnostics</span>
+            <h3>System Diagnostics</h3>
+            <p>Deep analysis of behavior, failure patterns, trust breakdowns, workflow friction, and architecture weakness inside AI and operational systems.</p>
+          </article>
+          <article class="capability-card reveal">
+            <span class="num">03 · Architecture</span>
+            <h3>Research-to-Product Translation</h3>
+            <p>Turning original ideas, frameworks, and research into real product structure, client language, system maps, and delivery-ready positioning.</p>
+          </article>
+          <article class="capability-card reveal">
+            <span class="num">04 · Delivery</span>
+            <h3>Advisory and Build Support</h3>
+            <p>Strategic advisory, scoped builds, proof materials, implementation planning, and business-facing system pages that make technical work legible.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="systems">
+      <div class="shell">
+        <div class="band reveal">
+          <div class="section-head" style="margin-bottom: 0;">
+            <h2>Flagship systems and business pillars.</h2>
+            <p>
+              This section gives the homepage real depth without changing the visual style. It frames the institute
+              as a professional system business instead of a placeholder splash page.
+            </p>
+          </div>
+          <div class="band-grid">
+            <div class="band-item">
+              <strong>West-OS</strong>
+              <span>Runtime governance and security layer for AI systems, with public-facing proof, pricing, and contact paths already available on its dedicated page.</span>
+            </div>
+            <div class="band-item">
+              <strong>Institute Research</strong>
+              <span>Original frameworks, diagnostics, and operating models shaped into pages, artifacts, and professional narratives that clients can understand.</span>
+            </div>
+            <div class="band-item">
+              <strong>Client Translation</strong>
+              <span>Turning complex architecture into usable deliverables for real businesses, including firms that need more precision, clarity, and dynamism online.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pages">
+      <div class="shell">
+        <div class="section-head reveal">
+          <h2>The rest of the site now has a proper front door.</h2>
+          <p>
+            Your subpages already existed. What was missing was a serious homepage that framed them all together.
+            These cards make the site read like a complete business presence.
+          </p>
+        </div>
+        <div class="page-grid">
+          <article class="page-card reveal">
+            <span class="num">Page 01</span>
+            <h3>West-OS</h3>
+            <p>The flagship product page with runtime governance, proof states, services, pricing, and contact flow.</p>
+            <a class="card-link" href="west-os.html">Open page</a>
+          </article>
+          <article class="page-card reveal">
+            <span class="num">Page 02</span>
+            <h3>About</h3>
+            <p>The founder story, positioning, and institute framing for people who need the person behind the work.</p>
+            <a class="card-link" href="about.html">Read about</a>
+          </article>
+          <article class="page-card reveal">
+            <span class="num">Page 03</span>
+            <h3>Portfolio</h3>
+            <p>A selected archive of systems, frameworks, public proof, and flagship builds across the broader body of work.</p>
+            <a class="card-link" href="portfolio.html">See portfolio</a>
+          </article>
+          <article class="page-card reveal">
+            <span class="num">Page 04</span>
+            <h3>Resume</h3>
+            <p>The public CV and professional profile for institutions, clients, collaborators, and formal review.</p>
+            <a class="card-link" href="resume.html">View resume</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="engage">
+      <div class="shell">
+        <div class="section-head reveal">
+          <h2>How clients can engage.</h2>
+          <p>
+            Clean, professional entry points keep the business side legible. This gives you real service language
+            without flattening the originality of the work.
+          </p>
+        </div>
+        <div class="engagement-grid">
+          <article class="engagement-card reveal">
+            <span class="num">Advisory</span>
+            <h3>Strategy Sessions</h3>
+            <p>For founders, operators, and firms who need architecture clarity, system diagnosis, or product positioning before they build further.</p>
+          </article>
+          <article class="engagement-card reveal">
+            <span class="num">Builds</span>
+            <h3>Scoped System Work</h3>
+            <p>For projects that need a real framework, governance layer, delivery map, or public-facing proof page rather than just abstract advice.</p>
+          </article>
+          <article class="engagement-card reveal">
+            <span class="num">Translation</span>
+            <h3>Research Packaging</h3>
+            <p>For complex original thinking that needs to become clear business language, high-trust pages, and professional materials clients can actually use.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing" id="contact">
+      <div class="shell">
+        <div class="closing-panel reveal">
+          <div class="kicker">Contact</div>
+          <h2>Bring the hard, strange, high-trust work here.</h2>
+          <p>
+            The institute is built for projects that need more than a template solution: governance, diagnostics,
+            architecture, translation, proof, and business framing. If the work is nuanced, sensitive, or unusually
+            complex, that is exactly the point.
+          </p>
+          <div class="hero-actions" style="margin-top: 28px;">
+            <a class="btn btn-primary" href="mailto:theforgottencode780@gmail.com">Email the Institute</a>
+            <a class="btn" href="portfolio.html">See selected work</a>
+            <a class="btn" href="resume.html">Review credentials</a>
+          </div>
+          <div class="closing-meta">
+            <div>
+              <strong>Email</strong>
+              <span>theforgottencode780@gmail.com</span>
+            </div>
+            <div>
+              <strong>Phone</strong>
+              <span>423-388-8304</span>
+            </div>
+            <div>
+              <strong>Base</strong>
+              <span>Tennessee · Remote-friendly · Research-led delivery</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer>
+    <div class="footer-row">
+      <span>The Forgotten Code Research Institute</span>
+      <span id="copyright-year">2026</span>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16 });
+
+    document.querySelectorAll(".reveal").forEach((node) => {
+      if (!node.classList.contains("visible")) {
+        observer.observe(node);
+      }
+    });
+
+    document.getElementById("copyright-year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
