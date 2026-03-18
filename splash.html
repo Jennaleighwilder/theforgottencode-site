@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Forgotten Code Research Institute</title>
+  <meta name="description" content="The Forgotten Code Research Institute. Enter the institute.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #030303;
+      --fg: #f6f1e7;
+      --muted: rgba(246, 241, 231, 0.68);
+      --line: rgba(246, 241, 231, 0.18);
+      --glow: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--fg);
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      overflow: hidden;
+    }
+
+    .screen {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px;
+      background:
+        radial-gradient(circle at 50% 36%, var(--glow), transparent 28%),
+        linear-gradient(180deg, #060606 0%, #020202 100%);
+      position: relative;
+      isolation: isolate;
+    }
+
+    .screen::before,
+    .screen::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .screen::before {
+      background:
+        linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%);
+      opacity: 0.4;
+      transform: scaleX(0.65);
+    }
+
+    .screen::after {
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.06) 0, transparent 1px),
+        radial-gradient(circle at 70% 40%, rgba(255,255,255,0.05) 0, transparent 1px),
+        radial-gradient(circle at 40% 80%, rgba(255,255,255,0.04) 0, transparent 1px);
+      background-size: 220px 220px;
+      opacity: 0.18;
+      mix-blend-mode: screen;
+    }
+
+    .frame {
+      width: min(1100px, 100%);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .kicker {
+      font-size: 12px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-family: "Bodoni Moda", serif;
+      font-weight: 700;
+      font-size: clamp(48px, 10vw, 132px);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      text-wrap: balance;
+      margin: 0 auto;
+      max-width: 12ch;
+      text-shadow: 0 0 24px rgba(255,255,255,0.05);
+    }
+
+    .sub {
+      margin: 28px auto 0;
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+    }
+
+    .actions {
+      margin-top: 44px;
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .enter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 180px;
+      padding: 14px 24px;
+      border: 1px solid var(--fg);
+      color: var(--fg);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      font-size: 12px;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .enter:hover {
+      background: var(--fg);
+      color: var(--bg);
+      transform: translateY(-1px);
+    }
+
+    .note {
+      margin-top: 18px;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(246, 241, 231, 0.5);
+    }
+
+    .footer {
+      position: absolute;
+      left: 32px;
+      right: 32px;
+      bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(246, 241, 231, 0.42);
+      z-index: 1;
+    }
+
+    @media (max-width: 720px) {
+      .footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="screen">
+    <section class="frame">
+      <div class="kicker">The Institute</div>
+      <h1>The Forgotten Code Research Institute</h1>
+      <p class="sub">
+        Enter when you are ready. The fuller business page, system proof, and contact path are behind the door.
+        More is coming. This is the opening.
+      </p>
+      <div class="actions">
+        <a class="enter" href="west-os.html">Enter</a>
+      </div>
+      <div class="note">More coming soon</div>
+    </section>
+    <div class="footer">
+      <span>West-OS</span>
+      <span>Runtime governance for AI systems</span>
+    </div>
+  </main>
+</body>
+</html>
