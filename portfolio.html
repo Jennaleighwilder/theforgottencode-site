@@ -208,9 +208,12 @@
     }
     @media (max-width: 900px) {
       .hero-metrics, .research-grid { grid-template-columns: 1fr 1fr; }
+      .nav-inner { flex-direction: column; align-items: flex-start; }
+      .links { width: 100%; gap: 12px; }
     }
     @media (max-width: 700px) {
       .hero-metrics, .research-grid { grid-template-columns: 1fr; }
+      .nav-inner, .wrap { width: min(1180px, calc(100% - 28px)); }
     }
   </style>
 </head>

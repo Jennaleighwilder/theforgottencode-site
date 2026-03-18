@@ -543,6 +543,11 @@
         flex-direction: column;
       }
 
+      .nav-links {
+        width: 100%;
+        gap: 10px 12px;
+      }
+
       .hero {
         min-height: auto;
         padding-top: 36px;
@@ -567,10 +572,28 @@
         font-size: clamp(44px, 15vw, 82px);
       }
 
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        line-height: 1.35;
+        padding: 14px 18px;
+      }
+
       .hero-copy,
       .section-head p,
       .closing-panel p {
         font-size: 17px;
+      }
+
+      .shell,
+      .nav-inner,
+      .footer-row {
+        width: min(1220px, calc(100% - 28px));
       }
     }
   </style>
